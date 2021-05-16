@@ -24,7 +24,6 @@ http.listen(server_port, () => {
 })
 
 app.post('/adduser', async(req, res) => {
-    console.log(req.body)
     const resuser = req.body.name
     const rescolor = req.body.color
     const user = new UserModel({ name: resuser, color: rescolor })
@@ -46,12 +45,10 @@ app.get('/read', async(req, res) => {
 });
 
 app.patch('/updateuser', async(req, res) => {
-    console.log(req.body)
     const imageID = req.body.images
     const id = req.body.id
     try {
         await UserModel.findById(id, (err, updatedUser)=>{
-          console.log(updatedUser)
         updatedUser.images.push(imageID)
         updatedUser.save()
         res.send('update')
@@ -107,7 +104,7 @@ app.patch('/updateimage', async(req, res) => {
 // });
 
 mongoose
-  .connect("mongodb+srv://sharon:Zxr2303811992@crud.vonoy.mongodb.net/naya-studio?retryWrites=true&w=majority", {
+  .connect("mongodb+srv://<password>@crud.vonoy.mongodb.net/naya-studio?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
