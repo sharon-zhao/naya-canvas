@@ -6,7 +6,7 @@ const User = require('../models/user')
 const router = express.Router()
 // ************************************* //
 // CREATE - POST /posts
-router.post('/adduser', (req, res, next) => {
+router.post(`https://localhost:5000/users`, (req, res, next) => {
   console.log('*******************************')
   // console.log(req.body)
   User.create(req.body.user)
