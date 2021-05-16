@@ -45,11 +45,13 @@ app.get('/read', async(req, res) => {
 });
 
 app.patch('/updateuser', async(req, res) => {
+    console.log('updateuser: ', req.body)
     const imageID = req.body.images
     const id = req.body.id
     try {
         await UserModel.findById(id, (err, updatedUser)=>{
         updatedUser.images.push(imageID)
+        console.log('updateuser: ',updatedUser)
         updatedUser.save()
         res.send('update')
       })
@@ -66,6 +68,7 @@ app.delete("/delete/:id", async(req,res)=>{
 
 //*******************IMAGE*********************//
 app.post('/addurl', async(req, res) => {
+    // console.log('addurl: ', req.body)
     const resurl = req.body.imageUrl
     const url = new ImageModel({ url:resurl })
     try {
@@ -91,6 +94,7 @@ app.patch('/updateimage', async(req, res) => {
     const userID = req.body.id
     try {
         await ImageModel.findById(imageID, (err, updatedImage)=>{
+          // console.log('pdatedImage: ', updatedImage)
         updatedImage.users.push(userID)
         updatedImage.save()
         res.send(updatedImage)
@@ -104,7 +108,7 @@ app.patch('/updateimage', async(req, res) => {
 // });
 
 mongoose
-  .connect("mongodb+srv://<password>@crud.vonoy.mongodb.net/naya-studio?retryWrites=true&w=majority", {
+  .connect("mongodb+srv://sharon:Zxr2303811992@crud.vonoy.mongodb.net/naya-studio?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
